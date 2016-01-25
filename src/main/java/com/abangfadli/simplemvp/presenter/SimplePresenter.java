@@ -2,12 +2,10 @@ package com.abangfadli.simplemvp.presenter;
 
 import android.os.Bundle;
 
-import com.abangfadli.simplemvp.view.ViewWithPresenter;
-
 import java.lang.ref.WeakReference;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public abstract class LightMvpPresenter<V> implements MvpPresenter<V> {
+public abstract class SimplePresenter<V> implements MvpPresenter<V> {
 
     protected final String TAG;
 
@@ -17,8 +15,8 @@ public abstract class LightMvpPresenter<V> implements MvpPresenter<V> {
     private CopyOnWriteArrayList<PresenterDestroyListener> onDestroyListeners;
 
 
-    public LightMvpPresenter() {
-        TAG = LightMvpPresenter.class.getSimpleName();
+    public SimplePresenter() {
+        TAG = SimplePresenter.class.getSimpleName();
         id = TAG + "/" + System.nanoTime() + "/" + (int) (Math.random() * Integer.MAX_VALUE);
         onDestroyListeners = new CopyOnWriteArrayList<>();
     }
