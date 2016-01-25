@@ -5,14 +5,13 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.abangfadli.simplemvp.lifecycle.PresenterLifecycleManager;
-import com.abangfadli.simplemvp.presenter.LightMvpPresenter;
-import com.abangfadli.simplemvp.presenter.MvpPresenter;
+import com.abangfadli.simplemvp.presenter.SimplePresenter;
 import com.abangfadli.simplemvp.view.ViewWithPresenter;
 
 /**
  * Created by ahmadfadli on 1/13/16.
  */
-public abstract class MvpActivity<P extends LightMvpPresenter>
+public abstract class MvpActivity<P extends SimplePresenter>
         extends AppCompatActivity
         implements ViewWithPresenter<P> {
 

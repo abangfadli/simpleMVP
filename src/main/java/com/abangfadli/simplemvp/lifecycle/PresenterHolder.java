@@ -2,7 +2,7 @@ package com.abangfadli.simplemvp.lifecycle;
 
 import android.support.v4.util.ArrayMap;
 
-import com.abangfadli.simplemvp.presenter.LightMvpPresenter;
+import com.abangfadli.simplemvp.presenter.SimplePresenter;
 import com.abangfadli.simplemvp.presenter.PresenterDestroyListener;
 
 /**
@@ -12,7 +12,7 @@ public class PresenterHolder {
 
     private static PresenterHolder instance;
 
-    private ArrayMap<String, LightMvpPresenter> presenters;
+    private ArrayMap<String, SimplePresenter> presenters;
 
 
     private PresenterHolder(){
@@ -27,7 +27,7 @@ public class PresenterHolder {
     }
 
 
-    public void add(LightMvpPresenter presenter) {
+    public void add(SimplePresenter presenter) {
         final String id = presenter.getId();
         presenters.put(id, presenter);
 
@@ -40,7 +40,7 @@ public class PresenterHolder {
         // TODO: Add presenter on destroy listener
     }
 
-    public <P extends LightMvpPresenter> P get(String id) {
+    public <P extends SimplePresenter> P get(String id) {
         if(presenters.containsKey(id)) {
             return (P) presenters.get(id);
         }
@@ -48,7 +48,7 @@ public class PresenterHolder {
         return null;
     }
 
-    public <P extends LightMvpPresenter> P getAndRemove(String id) {
+    public <P extends SimplePresenter> P getAndRemove(String id) {
         if(presenters.containsKey(id)) {
             return (P) presenters.remove(id);
         }

@@ -2,13 +2,13 @@ package com.abangfadli.simplemvp.lifecycle;
 
 import android.os.Bundle;
 
-import com.abangfadli.simplemvp.presenter.LightMvpPresenter;
+import com.abangfadli.simplemvp.presenter.SimplePresenter;
 import com.abangfadli.simplemvp.view.ViewWithPresenter;
 
 /**
  * Created by ahmadfadli on 1/13/16.
  */
-public final class PresenterLifecycleManager<P extends LightMvpPresenter> {
+public final class PresenterLifecycleManager<P extends SimplePresenter> {
 
     private static final String PRESENTER_STATE_KEY = "presenter_state";
     private static final String PRESENTER_ID_KEY = "presenter_id";
