@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/simpleMVP.iml" filepath="$PROJECT_DIR$/simpleMVP.iml" />
-      <module fileurl="file://$PROJECT_DIR$/simplemvp/simplemvp.iml" filepath="$PROJECT_DIR$/simplemvp/simplemvp.iml" />
-    </modules>
-  </component>
-</project>
