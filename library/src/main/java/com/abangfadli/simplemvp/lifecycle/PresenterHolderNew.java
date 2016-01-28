@@ -2,26 +2,26 @@ package com.abangfadli.simplemvp.lifecycle;
 
 import android.support.v4.util.ArrayMap;
 
-import com.abangfadli.simplemvp.presenter.SimplePresenter;
 import com.abangfadli.simplemvp.presenter.PresenterDestroyListener;
+import com.abangfadli.simplemvp.SimplePresenter;
 
 /**
  * Created by ahmadfadli on 1/13/16.
  */
-public class PresenterHolder {
+public class PresenterHolderNew {
 
-    private static PresenterHolder instance;
+    private static PresenterHolderNew instance;
 
     private ArrayMap<String, SimplePresenter> presenters;
 
 
-    private PresenterHolder(){
+    private PresenterHolderNew(){
         presenters = new ArrayMap<>();
     }
 
-    public static PresenterHolder getInstance() {
+    public static PresenterHolderNew getInstance() {
         if(instance == null) {
-            instance = new PresenterHolder();
+            instance = new PresenterHolderNew();
         }
         return instance;
     }

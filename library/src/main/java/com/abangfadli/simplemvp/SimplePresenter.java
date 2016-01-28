@@ -1,11 +1,15 @@
-package com.abangfadli.simplemvp.presenter;
+package com.abangfadli.simplemvp;
 
 import android.os.Bundle;
+
+import com.abangfadli.simplemvp.presenter.IPresenter;
+import com.abangfadli.simplemvp.presenter.PresenterDestroyListener;
+import com.abangfadli.simplemvp.view.IView;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public abstract class SimplePresenter<V> implements MvpPresenter<V> {
+public abstract class SimplePresenter<V extends IView> implements IPresenter<V> {
 
     protected final String TAG;
 
