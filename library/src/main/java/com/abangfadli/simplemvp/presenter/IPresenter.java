@@ -19,4 +19,8 @@ public interface IPresenter<V extends IView> {
     void saveState(Bundle state);
 
     void destroy();
+
+    void addOnDestroyListener(PresenterDestroyListener listener);
+
+    void removeOnDestroyListener(PresenterDestroyListener listener);
 }

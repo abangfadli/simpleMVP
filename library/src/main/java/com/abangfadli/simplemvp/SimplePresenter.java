@@ -29,7 +29,7 @@ public abstract class SimplePresenter<V extends IView> implements IPresenter<V> 
     // PUBLIC METHOD
     //================================================================================
     @Override
-    public String getId() {
+    public final String getId() {
         return id;
     }
 
@@ -54,10 +54,12 @@ public abstract class SimplePresenter<V extends IView> implements IPresenter<V> 
         onDestroy();
     }
 
+    @Override
     public void addOnDestroyListener(PresenterDestroyListener listener) {
         onDestroyListeners.add(listener);
     }
 
+    @Override
     public void removeOnDestroyListener(PresenterDestroyListener listener) {
         onDestroyListeners.remove(listener);
     }

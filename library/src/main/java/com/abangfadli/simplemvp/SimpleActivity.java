@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.abangfadli.simplemvp.lifecycle.PresenterLifecycleDelegate;
+import com.abangfadli.simplemvp.presenter.IPresenter;
 import com.abangfadli.simplemvp.view.PresenterFactory;
 import com.abangfadli.simplemvp.view.IView;
 import com.abangfadli.simplemvp.view.IViewWithPresenter;
@@ -12,7 +13,7 @@ import com.abangfadli.simplemvp.view.IViewWithPresenter;
 /**
  * Created by ahmadfadli on 1/28/16.
  */
-public abstract class SimpleActivity<V extends IView, P extends SimplePresenter<V>>
+public abstract class SimpleActivity<V extends IView, P extends IPresenter<V>>
         extends AppCompatActivity
         implements IViewWithPresenter<P>, PresenterFactory<V, P> {
 

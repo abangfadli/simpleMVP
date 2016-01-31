@@ -3,14 +3,14 @@ package com.abangfadli.simplemvp.lifecycle;
 import android.os.Bundle;
 
 import com.abangfadli.simplemvp.SimplePresenter;
+import com.abangfadli.simplemvp.presenter.IPresenter;
 import com.abangfadli.simplemvp.view.IView;
-import com.abangfadli.simplemvp.view.IViewWithPresenter;
 import com.abangfadli.simplemvp.view.PresenterFactory;
 
 /**
  * Created by ahmadfadli on 1/13/16.
  */
-public final class PresenterLifecycleDelegate<V extends IView, P extends SimplePresenter<V>> {
+public final class PresenterLifecycleDelegate<V extends IView, P extends IPresenter<V>> {
 
     private static final String PRESENTER_STATE_KEY = "presenter_state";
     private static final String PRESENTER_ID_KEY = "presenter_id";
@@ -52,14 +52,14 @@ public final class PresenterLifecycleDelegate<V extends IView, P extends SimpleP
             presenter.saveState(presenterBundle);
             outState.putBundle(PRESENTER_STATE_KEY, presenterBundle);
             outState.putString(PRESENTER_ID_KEY, presenter.getId());
-            PresenterHolderNew.getInstance().add(presenter);
+            PresenterHolder.getInstance().add(presenter);
         }
     }
 
     public P getPresenter() {
         if(presenter == null) {
             if (bundle != null) {
-                presenter = PresenterHolderNew.getInstance().get(bundle.getString(PRESENTER_ID_KEY));
+                presenter = PresenterHolder.getInstance().get(bundle.getString(PRESENTER_ID_KEY));
             }
 
             if (presenter == null) {

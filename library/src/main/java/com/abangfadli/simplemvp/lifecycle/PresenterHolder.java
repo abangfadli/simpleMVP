@@ -2,32 +2,33 @@ package com.abangfadli.simplemvp.lifecycle;
 
 import android.support.v4.util.ArrayMap;
 
+import com.abangfadli.simplemvp.presenter.IPresenter;
 import com.abangfadli.simplemvp.presenter.PresenterDestroyListener;
 import com.abangfadli.simplemvp.SimplePresenter;
 
 /**
  * Created by ahmadfadli on 1/13/16.
  */
-public class PresenterHolderNew {
+public class PresenterHolder {
 
-    private static PresenterHolderNew instance;
+    private static PresenterHolder instance;
 
-    private ArrayMap<String, SimplePresenter> presenters;
+    private ArrayMap<String, IPresenter> presenters;
 
 
-    private PresenterHolderNew(){
+    private PresenterHolder(){
         presenters = new ArrayMap<>();
     }
 
-    public static PresenterHolderNew getInstance() {
+    public static PresenterHolder getInstance() {
         if(instance == null) {
-            instance = new PresenterHolderNew();
+            instance = new PresenterHolder();
         }
         return instance;
     }
 
 
-    public void add(SimplePresenter presenter) {
+    public void add(IPresenter presenter) {
         final String id = presenter.getId();
         presenters.put(id, presenter);
 
@@ -40,7 +41,7 @@ public class PresenterHolderNew {
         // TODO: Add presenter on destroy listener
     }
 
-    public <P extends SimplePresenter> P get(String id) {
+    public <P extends IPresenter> P get(String id) {
         if(presenters.containsKey(id)) {
             return (P) presenters.get(id);
         }
@@ -48,7 +49,7 @@ public class PresenterHolderNew {
         return null;
     }
 
-    public <P extends SimplePresenter> P getAndRemove(String id) {
+    public <P extends IPresenter> P getAndRemove(String id) {
         if(presenters.containsKey(id)) {
             return (P) presenters.remove(id);
         }
