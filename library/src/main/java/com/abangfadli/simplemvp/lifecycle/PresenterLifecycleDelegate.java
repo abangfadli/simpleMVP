@@ -64,6 +64,9 @@ public final class PresenterLifecycleDelegate<V extends IView, P extends IPresen
 
             if (presenter == null) {
                 presenter = presenterFactory.createPresenter();
+                if (presenter == null) {
+                    throw new RuntimeException("Null Presenter. Did you return null on createPresenter()?");
+                }
                 if (bundle != null) {
                     presenter.loadState(bundle.getBundle(PRESENTER_STATE_KEY));
                 }
