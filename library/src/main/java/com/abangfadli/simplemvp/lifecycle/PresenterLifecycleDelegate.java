@@ -46,14 +46,18 @@ public final class PresenterLifecycleDelegate<V extends IView, P extends IPresen
         }
     }
 
-    public void onSavePresenter(Bundle outState) {
+    public Bundle onSavePresenter() {
+        Bundle bundle = new Bundle();
+
         if(presenter != null) {
             Bundle presenterBundle = new Bundle();
             presenter.saveState(presenterBundle);
-            outState.putBundle(PRESENTER_STATE_KEY, presenterBundle);
-            outState.putString(PRESENTER_ID_KEY, presenter.getId());
+            bundle.putBundle(PRESENTER_STATE_KEY, presenterBundle);
+            bundle.putString(PRESENTER_ID_KEY, presenter.getId());
             PresenterHolder.getInstance().add(presenter);
         }
+
+        return bundle;
     }
 
     public P getPresenter() {

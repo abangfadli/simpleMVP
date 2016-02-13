@@ -17,6 +17,8 @@ public abstract class SimpleActivity<V extends IView, P extends IPresenter<V>>
         extends AppCompatActivity
         implements IViewWithPresenter<P>, PresenterFactory<V, P> {
 
+    private static final String PRESENTER_BUNDLE_KEY = "presenter_bundle";
+
     private PresenterLifecycleDelegate<V, P> presenterDelegate = new PresenterLifecycleDelegate<>(this);
 
     @Override
@@ -30,7 +32,9 @@ public abstract class SimpleActivity<V extends IView, P extends IPresenter<V>>
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenterDelegate.onRestorePresenter(savedInstanceState);
+        if (savedInstanceState != null) {
+            presenterDelegate.onRestorePresenter(savedInstanceState.getBundle(PRESENTER_BUNDLE_KEY));
+        }
     }
 
     @Override
@@ -48,6 +52,6 @@ public abstract class SimpleActivity<V extends IView, P extends IPresenter<V>>
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        presenterDelegate.onSavePresenter(outState);
+        outState.putBundle(PRESENTER_BUNDLE_KEY, presenterDelegate.onSavePresenter());
     }
 }
