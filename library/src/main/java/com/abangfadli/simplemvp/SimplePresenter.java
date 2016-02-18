@@ -20,7 +20,7 @@ public abstract class SimplePresenter<V extends IView> implements IPresenter<V> 
 
 
     public SimplePresenter() {
-        TAG = SimplePresenter.class.getSimpleName();
+        TAG = this.getClass().getSimpleName();
         id = TAG + "/" + System.nanoTime() + "/" + (int) (Math.random() * Integer.MAX_VALUE);
         onDestroyListeners = new CopyOnWriteArrayList<>();
     }

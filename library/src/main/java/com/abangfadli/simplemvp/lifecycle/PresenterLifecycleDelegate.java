@@ -34,7 +34,7 @@ public final class PresenterLifecycleDelegate<V extends IView, P extends IPresen
     }
 
     public void onResume(V view) {
-        presenter.attachView(view);
+        getPresenter().attachView(view);
     }
 
     public void onPause(boolean isFinishing) {
