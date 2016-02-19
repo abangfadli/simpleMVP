@@ -13,13 +13,13 @@ import com.abangfadli.simplemvp.view.IViewWithPresenter;
 /**
  * Created by ahmadfadli on 1/28/16.
  */
-public abstract class SimpleActivity<V extends IView, P extends IPresenter<V>>
+public abstract class SimpleActivity<P extends IPresenter>
         extends AppCompatActivity
-        implements IViewWithPresenter<P>, PresenterFactory<V, P> {
+        implements IViewWithPresenter<P>, PresenterFactory<P> {
 
     private static final String PRESENTER_BUNDLE_KEY = "presenter_bundle";
 
-    private PresenterLifecycleDelegate<V, P> presenterDelegate = new PresenterLifecycleDelegate<>(this);
+    private PresenterLifecycleDelegate<P> presenterDelegate = new PresenterLifecycleDelegate<>(this);
 
     @Override
     public final P getPresenter() {
@@ -40,7 +40,7 @@ public abstract class SimpleActivity<V extends IView, P extends IPresenter<V>>
     @Override
     protected void onResume() {
         super.onResume();
-        presenterDelegate.onResume((V)this);
+        presenterDelegate.onResume(this);
     }
 
     @Override

@@ -10,16 +10,16 @@ import com.abangfadli.simplemvp.view.PresenterFactory;
 /**
  * Created by ahmadfadli on 1/13/16.
  */
-public final class PresenterLifecycleDelegate<V extends IView, P extends IPresenter<V>> {
+public final class PresenterLifecycleDelegate<P extends IPresenter> {
 
     private static final String PRESENTER_STATE_KEY = "presenter_state";
     private static final String PRESENTER_ID_KEY = "presenter_id";
 
-    protected PresenterFactory<V, P> presenterFactory;
+    protected PresenterFactory<P> presenterFactory;
     protected P presenter;
     private Bundle bundle;
 
-    public PresenterLifecycleDelegate(PresenterFactory<V, P> presenterFactory) {
+    public PresenterLifecycleDelegate(PresenterFactory<P> presenterFactory) {
         this.presenterFactory = presenterFactory;
     }
 
@@ -33,7 +33,7 @@ public final class PresenterLifecycleDelegate<V extends IView, P extends IPresen
         getPresenter();
     }
 
-    public void onResume(V view) {
+    public void onResume(IView view) {
         getPresenter().attachView(view);
     }
 
