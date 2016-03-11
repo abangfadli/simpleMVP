@@ -2,37 +2,39 @@ package com.abangfadli.simplemvp.lifecycle;
 
 import android.os.Bundle;
 
-import com.abangfadli.simplemvp.presenter.SimplePresenter;
-import com.abangfadli.simplemvp.view.ViewWithPresenter;
+import com.abangfadli.simplemvp.SimplePresenter;
+import com.abangfadli.simplemvp.presenter.IPresenter;
+import com.abangfadli.simplemvp.view.IView;
+import com.abangfadli.simplemvp.view.PresenterFactory;
 
 /**
  * Created by ahmadfadli on 1/13/16.
  */
-public final class PresenterLifecycleManager<P extends SimplePresenter> {
+public final class PresenterLifecycleDelegate<P extends IPresenter> {
 
     private static final String PRESENTER_STATE_KEY = "presenter_state";
     private static final String PRESENTER_ID_KEY = "presenter_id";
 
-    protected ViewWithPresenter<P> viewWithPresenter;
+    protected PresenterFactory<P> presenterFactory;
     protected P presenter;
     private Bundle bundle;
 
-    public PresenterLifecycleManager(ViewWithPresenter<P> viewWithPresenter) {
-        this.viewWithPresenter = viewWithPresenter;
+    public PresenterLifecycleDelegate(PresenterFactory<P> presenterFactory) {
+        this.presenterFactory = presenterFactory;
     }
 
     public void onRestorePresenter(Bundle savedInstanceState) {
         bundle = savedInstanceState;
-        if (presenter != null)
+        if (presenter != null) {
             throw new IllegalArgumentException("onRestoreInstanceState() should be called before onResume()");
+        }
 
         this.bundle = savedInstanceState;
         getPresenter();
     }
 
-    public void onResume(Object view) {
-        //noinspection unchecked
-        presenter.attachView(view);
+    public void onResume(IView view) {
+        getPresenter().attachView(view);
     }
 
     public void onPause(boolean isFinishing) {
@@ -44,14 +46,18 @@ public final class PresenterLifecycleManager<P extends SimplePresenter> {
         }
     }
 
-    public void onSavePresenter(Bundle outState) {
+    public Bundle onSavePresenter() {
+        Bundle bundle = new Bundle();
+
         if(presenter != null) {
             Bundle presenterBundle = new Bundle();
             presenter.saveState(presenterBundle);
-            outState.putBundle(PRESENTER_STATE_KEY, presenterBundle);
-            outState.putString(PRESENTER_ID_KEY, presenter.getId());
+            bundle.putBundle(PRESENTER_STATE_KEY, presenterBundle);
+            bundle.putString(PRESENTER_ID_KEY, presenter.getId());
             PresenterHolder.getInstance().add(presenter);
         }
+
+        return bundle;
     }
 
     public P getPresenter() {
@@ -61,8 +67,13 @@ public final class PresenterLifecycleManager<P extends SimplePresenter> {
             }
 
             if (presenter == null) {
-                presenter = viewWithPresenter.createPresenter();
-                presenter.loadState(bundle.getBundle(PRESENTER_STATE_KEY));
+                presenter = presenterFactory.createPresenter();
+                if (presenter == null) {
+                    throw new RuntimeException("Null Presenter. Did you return null on createPresenter()?");
+                }
+                if (bundle != null) {
+                    presenter.loadState(bundle.getBundle(PRESENTER_STATE_KEY));
+                }
             }
         }
         return presenter;
