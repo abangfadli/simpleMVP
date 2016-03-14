@@ -1,1 +1,1 @@
-include ':simpleMVP'
+include ':simpleMVP-core'
