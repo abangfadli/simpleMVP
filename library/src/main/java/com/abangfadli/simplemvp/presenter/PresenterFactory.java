@@ -1,4 +1,4 @@
-package com.abangfadli.simplemvp.view;
+package com.abangfadli.simplemvp.presenter;
 
 import com.abangfadli.simplemvp.presenter.IPresenter;
 

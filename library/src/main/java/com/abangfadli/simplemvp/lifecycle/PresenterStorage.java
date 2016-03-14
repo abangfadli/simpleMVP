@@ -4,25 +4,24 @@ import android.support.v4.util.ArrayMap;
 
 import com.abangfadli.simplemvp.presenter.IPresenter;
 import com.abangfadli.simplemvp.presenter.PresenterDestroyListener;
-import com.abangfadli.simplemvp.SimplePresenter;
 
 /**
  * Created by ahmadfadli on 1/13/16.
  */
-public class PresenterHolder {
+public class PresenterStorage {
 
-    private static PresenterHolder instance;
+    private static PresenterStorage instance;
 
     private ArrayMap<String, IPresenter> presenters;
 
 
-    private PresenterHolder(){
+    private PresenterStorage(){
         presenters = new ArrayMap<>();
     }
 
-    public static PresenterHolder getInstance() {
+    public static PresenterStorage getInstance() {
         if(instance == null) {
-            instance = new PresenterHolder();
+            instance = new PresenterStorage();
         }
         return instance;
     }

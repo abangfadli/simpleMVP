@@ -1,4 +1,4 @@
-package com.abangfadli.simplemvp;
+package com.abangfadli.simplemvp.presenter;
 
 import android.os.Bundle;
 
@@ -11,7 +11,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public abstract class SimplePresenter<V extends IView> implements IPresenter<V> {
 
-    protected final String TAG;
+    protected final String TAG = this.getClass().getSimpleName();
 
     private final String id;
     protected WeakReference<V> view;
@@ -20,7 +20,7 @@ public abstract class SimplePresenter<V extends IView> implements IPresenter<V> 
 
 
     public SimplePresenter() {
-        TAG = this.getClass().getSimpleName();
+
         id = TAG + "/" + System.nanoTime() + "/" + (int) (Math.random() * Integer.MAX_VALUE);
         onDestroyListeners = new CopyOnWriteArrayList<>();
     }

@@ -2,10 +2,9 @@ package com.abangfadli.simplemvp.lifecycle;
 
 import android.os.Bundle;
 
-import com.abangfadli.simplemvp.SimplePresenter;
 import com.abangfadli.simplemvp.presenter.IPresenter;
 import com.abangfadli.simplemvp.view.IView;
-import com.abangfadli.simplemvp.view.PresenterFactory;
+import com.abangfadli.simplemvp.presenter.PresenterFactory;
 
 /**
  * Created by ahmadfadli on 1/13/16.
@@ -54,7 +53,7 @@ public final class PresenterLifecycleDelegate<P extends IPresenter> {
             presenter.saveState(presenterBundle);
             bundle.putBundle(PRESENTER_STATE_KEY, presenterBundle);
             bundle.putString(PRESENTER_ID_KEY, presenter.getId());
-            PresenterHolder.getInstance().add(presenter);
+            PresenterStorage.getInstance().add(presenter);
         }
 
         return bundle;
@@ -63,7 +62,7 @@ public final class PresenterLifecycleDelegate<P extends IPresenter> {
     public P getPresenter() {
         if(presenter == null) {
             if (bundle != null) {
-                presenter = PresenterHolder.getInstance().get(bundle.getString(PRESENTER_ID_KEY));
+                presenter = PresenterStorage.getInstance().get(bundle.getString(PRESENTER_ID_KEY));
             }
 
             if (presenter == null) {

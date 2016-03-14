@@ -1,4 +1,4 @@
-package com.abangfadli.simplemvp;
+package com.abangfadli.simplemvp.view.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,17 +6,18 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.abangfadli.simplemvp.lifecycle.PresenterLifecycleDelegate;
 import com.abangfadli.simplemvp.presenter.IPresenter;
-import com.abangfadli.simplemvp.view.PresenterFactory;
 import com.abangfadli.simplemvp.view.IView;
-import com.abangfadli.simplemvp.view.IViewWithPresenter;
+import com.abangfadli.simplemvp.presenter.PresenterFactory;
+import com.abangfadli.simplemvp.presenter.PresenterOwner;
 
 /**
  * Created by ahmadfadli on 1/28/16.
  */
 public abstract class SimpleActivity<P extends IPresenter>
         extends AppCompatActivity
-        implements IViewWithPresenter<P>, PresenterFactory<P> {
+        implements IView, PresenterOwner<P>, PresenterFactory<P> {
 
+    protected final String TAG = this.getClass().getSimpleName();
     private static final String PRESENTER_BUNDLE_KEY = "presenter_bundle";
 
     private PresenterLifecycleDelegate<P> presenterDelegate = new PresenterLifecycleDelegate<>(this);
