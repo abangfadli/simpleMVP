@@ -3,6 +3,7 @@ package com.abangfadli.simplemvp.view.dialog;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDialog;
 
 import com.abangfadli.simplemvp.lifecycle.PresenterLifecycleDelegate;
 import com.abangfadli.simplemvp.presenter.IPresenter;
@@ -14,7 +15,7 @@ import com.abangfadli.simplemvp.view.IView;
  * Created by ahmadfadli on 3/15/16.
  */
 public abstract class SimpleDialog<P extends IPresenter>
-        extends BaseDialog
+        extends AppCompatDialog
         implements IView, PresenterOwner<P>, PresenterFactory<P> {
 
     protected final String TAG = this.getClass().getSimpleName();
@@ -22,18 +23,17 @@ public abstract class SimpleDialog<P extends IPresenter>
     private static final String PARENT_STATE_KEY = "parent_state";
     private static final String PRESENTER_STATE_KEY = "presenter_state";
 
+    protected Context mContext;
+
     private PresenterLifecycleDelegate<P> presenterDelegate = new PresenterLifecycleDelegate<>(this);
 
     public SimpleDialog(Context context) {
-        super(context);
+        this(context, 0);
     }
 
     public SimpleDialog(Context context, int theme) {
         super(context, theme);
-    }
-
-    protected SimpleDialog(Context context, boolean cancelable, OnCancelListener cancelListener) {
-        super(context, cancelable, cancelListener);
+        mContext = context;
     }
 
     @Override

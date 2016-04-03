@@ -23,4 +23,6 @@ public interface IPresenter<V extends IView> {
     void addOnDestroyListener(PresenterDestroyListener listener);
 
     void removeOnDestroyListener(PresenterDestroyListener listener);
+
+
 }

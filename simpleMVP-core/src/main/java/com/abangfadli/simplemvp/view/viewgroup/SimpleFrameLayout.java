@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.widget.FrameLayout;
 
 import com.abangfadli.simplemvp.lifecycle.PresenterLifecycleDelegate;
 import com.abangfadli.simplemvp.presenter.IPresenter;
@@ -16,7 +17,7 @@ import com.abangfadli.simplemvp.presenter.PresenterOwner;
  * Created by ahmadfadli on 3/11/16.
  */
 public abstract class SimpleFrameLayout<P extends IPresenter>
-        extends BaseFrameLayout
+        extends FrameLayout
         implements IView, PresenterOwner<P>, PresenterFactory<P> {
 
     protected final String TAG = this.getClass().getSimpleName();
