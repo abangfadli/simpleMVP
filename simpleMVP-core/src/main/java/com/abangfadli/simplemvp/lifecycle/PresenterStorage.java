@@ -14,7 +14,6 @@ public class PresenterStorage {
 
     private ArrayMap<String, IPresenter> presenters;
 
-
     private PresenterStorage(){
         presenters = new ArrayMap<>();
     }
